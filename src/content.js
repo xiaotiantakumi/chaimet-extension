@@ -1,13 +1,15 @@
-// import 'core-js';  // NOTE: babel で useBuiltIns: 'entry' にする場合に必要
-const moment = require('moment');
-import axios from 'axios';
+// // import 'core-js';  // NOTE: babel で useBuiltIns: 'entry' にする場合に必要
+// const moment = require('moment');
+// import axios from 'axios';
 
-const now = moment();
-(async () => {
-  const res = await axios.get('https://www.google.com/search?q=test');
-  console.log({
-    from: 'content.js',
-    now: now.format('YYYY/MM/DD HH:mm:ss'),
-    data: res.data,
-  })
-})();
+
+let lastSelectedStr;
+setInterval(() => {
+  let selection = window.getSelection();
+  let currentStr = selection.toString();
+  if (!currentStr || currentStr === lastSelectedStr) {
+    return;
+  }
+  lastSelectedStr = currentStr;
+  console.log(selection.toString());
+}, 1000);
