@@ -1,6 +1,4 @@
-// // import 'core-js';  // NOTE: babel で useBuiltIns: 'entry' にする場合に必要
-// const moment = require('moment');
-// import axios from 'axios';
+import { WordInfo } from "./chaimet";
 
 
 let lastSelectedStr;
@@ -18,3 +16,10 @@ setInterval(() => {
   })
   console.log(selection.toString());
 }, 1000);
+
+chrome.runtime.onMessage.addListener((request,sender,sendMessage)=>{
+  if(request.type==='getWordInfo'){
+  let wordInfo = request.msg;
+  wordInfo.toConsoleLog();
+  }
+})

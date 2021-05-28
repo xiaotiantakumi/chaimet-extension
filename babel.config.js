@@ -1,7 +1,8 @@
 module.exports = function (api) {
   api.cache(true);
 
-  const presets = [["@babel/preset-env", {
+  const presets = [
+    ["@babel/preset-env", {
       // NOTE: "usage" だと上手く動かなかった、詳細は未確認
       // useBuiltIns: "entry",
       // corejs: 3,
@@ -10,9 +11,12 @@ module.exports = function (api) {
         firefox: "62",
       },
     }]];
-
+  const plugins = [ 
+    "@babel/plugin-proposal-class-properties" 
+  ];
   return {
     presets,
+    plugins,
     sourceType: "unambiguous",
   };
 }

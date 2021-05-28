@@ -12,11 +12,10 @@ chrome.runtime.onMessage.addListener((request,sender,sendMessage)=>{
     let titleEle = doc.getElementsByClassName('pnyn');
     let descriptionEle = doc.getElementsByClassName('lvlB')
     let wordInfo = new WordInfo('',titleEle,descriptionEle);
-    console.log(titleEle[0].innerText);
-    let length = descriptionEle.length > 3 ? 3 : descriptionEle.length;
-    for (let i = 0; i < length; i++) {
-      console.log(descriptionEle[i].innerText);
-    } 
+    // chrome.runtime.sendMessage({
+    //   type: 'getWordInfo',
+    //   msg:wordInfo
+    // })
   })
   .catch((error) => {
     console.log('ERROR!! occurred in Backend.')
