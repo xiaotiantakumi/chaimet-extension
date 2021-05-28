@@ -11,5 +11,10 @@ setInterval(() => {
     return;
   }
   lastSelectedStr = currentStr;
+  // send current selected text 
+  chrome.runtime.sendMessage({
+    type: 'selectedMsg',
+    msg:lastSelectedStr
+  })
   console.log(selection.toString());
 }, 1000);

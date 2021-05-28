@@ -1,25 +1,25 @@
 // const moment = require('moment');
-// import axios from 'axios';
+import axios from 'axios';
+import {WordInfo} from './chaimet.js'
 
-// const now = moment();
-// (async () => {
-//   const res = await axios.get('https://www.google.com/search?q=test');
-//   console.log({
-//     from: 'background.js',
-//     now: now.format('YYYY/MM/DD HH:mm:ss'),
-//     data: res.data,
-//   })
-// })();
-
-// const now = moment();
-// (async () => {
-//   const res = await axios.get('https://cjjc.weblio.jp/content/%E4%BB%80%E4%B9%88');
-//   let doc = new DOMParser().parseFromString(res.data, "text/html");
-//   let titleEle = doc.getElementsByClassName('pnyn');
-//   let discriptEle = doc.getElementsByClassName('lvlB')
-//   console.log(titleEle[0].innerText);
-//   let length = discriptEle.length > 3 ? 3 : discriptEle.length;
-//   for (let i = 0; i < length; i++) {
-//     console.log(discriptEle[i].innerText);
-//   }
-// })();
+const baseUrl = "https://cjjc.weblio.jp/content/";
+chrome.runtime.onMessage.addListener((request,sender,sendMessage)=>{
+  if(request.type==='selectedMsg'){
+  let word = encodeURI(request.msg);
+  axios.get(baseUrl + word)
+  .then((res) => {
+    let doc = new DOMParser().parseFromString(res.data, "text/html");
+    let titleEle = doc.getElementsByClassName('pnyn');
+    let descriptionEle = doc.getElementsByClassName('lvlB')
+    let wordInfo = new WordInfo('',titleEle,descriptionEle);
+    console.log(titleEle[0].innerText);
+    let length = descriptionEle.length > 3 ? 3 : descriptionEle.length;
+    for (let i = 0; i < length; i++) {
+      console.log(descriptionEle[i].innerText);
+    } 
+  })
+  .catch((error) => {
+    console.log('ERROR!! occurred in Backend.')
+  });
+  }
+})
