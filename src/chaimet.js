@@ -9,6 +9,7 @@ export class WordInfo {
         this.#setPinyin();
         this.#setDescription();
         //this.#toConsoleLog();
+        this.ToConsoleLog = this.toConsoleLog;
     }
     toConsoleLog() {
         if (this.pinyin) {
