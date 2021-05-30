@@ -1,14 +1,14 @@
 export class WordInfo {
-    #site
-    #pinyinEle
-    #descriptionEle
+    site
+    pinyinEle
+    descriptionEle
     constructor(site, pinyinEle, descriptionEle) {
-        this.#site = site;
-        this.#pinyinEle = pinyinEle;
-        this.#descriptionEle = descriptionEle;
-        this.#setPinyin();
-        this.#setDescription();
-        //this.#toConsoleLog();
+        this.site = site;
+        this.pinyinEle = pinyinEle;
+        this.descriptionEle = descriptionEle;
+        this.setPinyin();
+        this.setDescription();
+        //this.toConsoleLog();
         this.ToConsoleLog = this.toConsoleLog;
     }
     toConsoleLog() {
@@ -19,23 +19,23 @@ export class WordInfo {
             console.log(this.Description);
         }
     }
-    #setPinyin() {
-        let item = this.#pinyinEle[0];
+    setPinyin() {
+        let item = this.pinyinEle[0];
         if (item) {
             this.pinyin = item.innerText;
             return;
         }
         this.pinyin
     }
-    #setDescription() {
+    setDescription() {
         let result = '';
-        if (!this.#descriptionEle) return result;
-        let length = this.#descriptionEle.length > 3 ? 3 : this.#descriptionEle.length;
+        if (!this.descriptionEle) return result;
+        let length = this.descriptionEle.length > 10 ? 10 : this.descriptionEle.length;
         for (let i = 0; i < length; i++) {
             if (i != 0) {
-                result += '\n';
+                result += '<br>';
             }
-            result += this.#descriptionEle[i].innerText
+            result += this.descriptionEle[i].innerText
         }
         this.Description = result;
     }

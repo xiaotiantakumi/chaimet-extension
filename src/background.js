@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener((request,sender,sendMessage)=>{
   .then((res) => {
     let doc = new DOMParser().parseFromString(res.data, "text/html");
     let titleEle = doc.getElementsByClassName('pnyn');
-    let descriptionEle = doc.getElementsByClassName('lvlB')
+    let descriptionEle = doc.getElementsByClassName('level0')
     let wordInfo = new WordInfo('',titleEle,descriptionEle);
     chrome.tabs.sendMessage(fromTabId, {
         type: 'getWordInfo',
